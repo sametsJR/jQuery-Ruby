@@ -8,4 +8,10 @@ CSV.foreach(file_name, {headers: true}) do |row|
   data << row.to_hash
 end
 
-print data
+rows = {}
+
+data.uniq {|e| e['Имя клиента в системе']}.each do |row|
+  rows[row.values.last] = []
+end
+
+print rows
