@@ -24,4 +24,17 @@ data.each do |hash|
   arr << list
 end
 
-print arr
+arr.each do |hash|
+  rows[hash.keys.first] << hash
+end
+
+rows.each do |key, value|
+  value.uniq! {|e| e['number']}
+  value.map do |hash|
+    hash.each {|k,v| hash[k] = v.to_i}
+  end
+  value.map! {|s| s.values.first}
+  calls_hash[key] = value.sum
+end
+
+print calls_hash
